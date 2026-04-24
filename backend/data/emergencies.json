@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "EMG-3F1699FD",
+    "user_id": "student_001",
+    "location": "Hostel Block A",
+    "description": "Test emergency",
+    "timestamp": "2026-04-23T18:03:23.894845+00:00",
+    "status": "TRIGGERED"
+  },
+  {
+    "id": "EMG-4E3CA982",
+    "user_id": "student_001",
+    "location": "Campus Hostel Block A",
+    "description": "Emergency triggered via HailMary button",
+    "timestamp": "2026-04-23T18:14:55.499550+00:00",
+    "status": "TRIGGERED"
+  }
+]

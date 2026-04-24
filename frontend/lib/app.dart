@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'theme/app_theme.dart';
-import 'screens/home_screen.dart';
+import 'screens/splash_screen.dart';
 
 class HailMaryApp extends StatelessWidget {
   const HailMaryApp({super.key});
@@ -11,7 +11,7 @@ class HailMaryApp extends StatelessWidget {
       title: 'HailMary Health',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }

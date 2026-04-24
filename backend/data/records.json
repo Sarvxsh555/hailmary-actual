@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": "REC-39728EC2",
+    "user_id": "student_001",
+    "type": "vitals",
+    "date": "2026-04-23T18:03:28.160721+00:00",
+    "result_summary": "HR: 88 BPM • SpO₂: 95%",
+    "risk_level": "LOW",
+    "details": {
+      "heart_rate": 88,
+      "spo2_estimate": 95,
+      "confidence": 0.43
+    }
+  }
+]
