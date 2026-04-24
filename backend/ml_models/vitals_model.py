@@ -14,7 +14,7 @@ class VitalsModel:
             red_signal (list[float]): Red channel intensity values from the camera.
             blue_signal (list[float]): Blue channel intensity values (proxy for Infrared).
             duration (float): Total measurement duration in seconds (useful to compute sampling rate = len(signal)/duration).
-            user_id (str): Student identifier.
+            user_id (str): Patient identifier.
 
         Returns:
             dict: Expected API response shape:

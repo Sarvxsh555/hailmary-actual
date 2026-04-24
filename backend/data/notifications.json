@@ -3,9 +3,9 @@
     "event_id": "EMG-3F1699FD",
     "timestamp": "2026-04-23T18:03:23.894845+00:00",
     "notifications": [
-      "[NOTIFY] Campus Health Center alerted for event EMG-3F1699FD",
-      "[NOTIFY] Hostel Warden notified — Location: Hostel Block A",
-      "[NOTIFY] Emergency contact SMS queued for user student_001"
+      "[NOTIFY] Emergency Health Center alerted for event EMG-3F1699FD",
+      "[NOTIFY] Emergency contacts notified — Location: Home",
+      "[NOTIFY] Emergency contact SMS queued for user patient_001"
     ],
     "status": "SENT"
   },
@@ -13,9 +13,9 @@
     "event_id": "EMG-4E3CA982",
     "timestamp": "2026-04-23T18:14:55.499550+00:00",
     "notifications": [
-      "[NOTIFY] Campus Health Center alerted for event EMG-4E3CA982",
-      "[NOTIFY] Hostel Warden notified — Location: Campus Hostel Block A",
-      "[NOTIFY] Emergency contact SMS queued for user student_001"
+      "[NOTIFY] Emergency Health Center alerted for event EMG-4E3CA982",
+      "[NOTIFY] Emergency contacts notified — Location: District 12",
+      "[NOTIFY] Emergency contact SMS queued for user patient_001"
     ],
     "status": "SENT"
   }

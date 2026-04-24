@@ -1,6 +1,6 @@
 """
 HailMary Health — FastAPI Backend
-Emergency-first, AI-assisted health response system for campus students.
+Emergency-first, AI-assisted health response system for patients.
 
 This is the main application entry point. It sets up CORS, mounts
 all route modules, and serves static mock assets.
@@ -19,7 +19,7 @@ from routes.records import router as records_router
 
 app = FastAPI(
     title="HailMary Health API",
-    description="Emergency-first, AI-assisted health response backend for campus students.",
+    description="Emergency-first, AI-assisted health response backend for patients.",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",

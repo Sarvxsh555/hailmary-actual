@@ -33,7 +33,7 @@ def create_record(
     Create and store a new health record.
 
     Args:
-        user_id: Student identifier
+        user_id: Patient identifier
         record_type: Type of record ('xray', 'vitals', 'emergency')
         result_summary: Short human-readable summary
         risk_level: Risk categorization (LOW/MEDIUM/HIGH)

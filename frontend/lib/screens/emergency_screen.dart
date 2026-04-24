@@ -43,8 +43,8 @@ class _EmergencyScreenState extends State<EmergencyScreen>
   Future<void> _triggerEmergency() async {
     try {
       final event = await ApiService().triggerEmergency(
-        userId: 'student_001',
-        location: 'Campus Hostel Block A',
+        userId: 'patient_001',
+        location: 'Home / Current Location',
         description: 'Emergency triggered via HailMary button',
       );
       if (mounted) {
@@ -140,7 +140,7 @@ class _EmergencyScreenState extends State<EmergencyScreen>
           ),
           const SizedBox(height: 8),
           Text(
-            'Contacting campus health services',
+            'Contacting emergency health services',
             style: GoogleFonts.inter(
               fontSize: 14,
               color: AppColors.textSecondary,
@@ -210,7 +210,7 @@ class _EmergencyScreenState extends State<EmergencyScreen>
                 value: _formatTime(DateTime.now()),
               ),
               const SizedBox(height: 14),
-              _DetailRow(label: 'Location', value: 'Campus Hostel Block A'),
+              _DetailRow(label: 'Location', value: 'Home / Current Location'),
               const SizedBox(height: 14),
               _DetailRow(label: 'Status', value: 'DISPATCHED', isStatus: true),
             ],
@@ -242,8 +242,8 @@ class _EmergencyScreenState extends State<EmergencyScreen>
                 ],
               ),
               const SizedBox(height: 12),
-              _NotifItem(text: 'Campus Health Center alerted', time: '0s ago'),
-              _NotifItem(text: 'Hostel Warden notified', time: '1s ago'),
+              _NotifItem(text: 'Emergency Health Center alerted', time: '0s ago'),
+              _NotifItem(text: 'Emergency contacts notified', time: '1s ago'),
               _NotifItem(text: 'Emergency contact SMS sent', time: '2s ago'),
             ],
           ),

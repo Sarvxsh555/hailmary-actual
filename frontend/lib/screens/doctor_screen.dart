@@ -22,7 +22,7 @@ class _DoctorScreenState extends State<DoctorScreen>
   final List<_PatientData> _patients = [
     _PatientData(
       name: 'Arjun Kumar',
-      id: 'STU-2026-001',
+      id: 'PAT-2026-001',
       age: 20,
       lastVisit: DateTime.now().subtract(const Duration(hours: 2)),
       condition: 'Chest Pain — Under Observation',
@@ -31,7 +31,7 @@ class _DoctorScreenState extends State<DoctorScreen>
     ),
     _PatientData(
       name: 'Priya Sharma',
-      id: 'STU-2026-019',
+      id: 'PAT-2026-019',
       age: 19,
       lastVisit: DateTime.now().subtract(const Duration(hours: 5)),
       condition: 'Seasonal Allergies',
@@ -40,7 +40,7 @@ class _DoctorScreenState extends State<DoctorScreen>
     ),
     _PatientData(
       name: 'Rahul Desai',
-      id: 'STU-2026-042',
+      id: 'PAT-2026-042',
       age: 21,
       lastVisit: DateTime.now().subtract(const Duration(days: 1)),
       condition: 'Post-Fracture Follow-up',
@@ -49,7 +49,7 @@ class _DoctorScreenState extends State<DoctorScreen>
     ),
     _PatientData(
       name: 'Sneha Patel',
-      id: 'STU-2026-007',
+      id: 'PAT-2026-007',
       age: 20,
       lastVisit: DateTime.now().subtract(const Duration(hours: 8)),
       condition: 'Migraine — Recurring Episodes',
@@ -58,7 +58,7 @@ class _DoctorScreenState extends State<DoctorScreen>
     ),
     _PatientData(
       name: 'Vikram Singh',
-      id: 'STU-2026-033',
+      id: 'PAT-2026-033',
       age: 22,
       lastVisit: DateTime.now().subtract(const Duration(days: 3)),
       condition: 'Routine Checkup',
@@ -69,18 +69,18 @@ class _DoctorScreenState extends State<DoctorScreen>
 
   final List<_EmergencyAlert> _emergencyAlerts = [
     _EmergencyAlert(
-      studentName: 'Arjun Kumar',
-      studentId: 'STU-2026-001',
+      patientName: 'Arjun Kumar',
+      patientId: 'PAT-2026-001',
       timestamp: DateTime.now().subtract(const Duration(hours: 2)),
-      location: 'Hostel Block A, Room 204',
+      location: 'Sector 4, Building B, Room 204',
       description: 'Severe chest pain, difficulty breathing',
       isResolved: false,
     ),
     _EmergencyAlert(
-      studentName: 'Neha Gupta',
-      studentId: 'STU-2026-055',
+      patientName: 'Neha Gupta',
+      patientId: 'PAT-2026-055',
       timestamp: DateTime.now().subtract(const Duration(hours: 18)),
-      location: 'Library Building, Ground Floor',
+      location: 'Downtown Mall, Ground Floor',
       description: 'Fainting episode, hit head on desk',
       isResolved: true,
     ),
@@ -987,7 +987,7 @@ class _EmergencyAlertCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      alert.studentName,
+                      alert.patientName,
                       style: GoogleFonts.outfit(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
@@ -995,7 +995,7 @@ class _EmergencyAlertCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      alert.studentId,
+                      alert.patientId,
                       style: GoogleFonts.inter(
                         fontSize: 11,
                         color: AppColors.textTertiary,
@@ -1536,16 +1536,16 @@ class _VitalsSnapshot {
 }
 
 class _EmergencyAlert {
-  final String studentName;
-  final String studentId;
+  final String patientName;
+  final String patientId;
   final DateTime timestamp;
   final String location;
   final String description;
   final bool isResolved;
 
   const _EmergencyAlert({
-    required this.studentName,
-    required this.studentId,
+    required this.patientName,
+    required this.patientId,
     required this.timestamp,
     required this.location,
     required this.description,

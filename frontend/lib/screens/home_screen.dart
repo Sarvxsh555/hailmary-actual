@@ -7,7 +7,9 @@ import 'emergency_screen.dart';
 import 'upload_screen.dart';
 import 'vitals_screen.dart';
 import 'records_screen.dart';
-import 'settings_screen.dart';
+import 'profile_screen.dart';
+import 'cough_screen.dart';
+import 'government_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -104,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     GestureDetector(
                       onTap: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const SettingsScreen()),
+                        MaterialPageRoute(builder: (_) => const ProfileScreen()),
                       ),
                       child: Container(
                         width: 48,
@@ -136,7 +138,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 const SizedBox(height: 16),
                 Center(
                   child: Text(
-                    'Press when you need immediate help',
+                    'This will alert emergency health services and log an emergency event.',
+                    textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: AppColors.textTertiary,
                           fontSize: 13,
@@ -170,11 +173,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     Expanded(
                       child: _QuickActionCard(
                         icon: Icons.edit_note_rounded,
-                        label: 'Enter\nSymptoms',
+                        label: 'Cough\nAnalysis',
                         color: AppColors.warning,
                         onTap: () => Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => const UploadScreen()),
+                          MaterialPageRoute(builder: (_) => const CoughScreen()),
                         ),
                       ),
                     ),
@@ -203,6 +206,34 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(builder: (_) => const RecordsScreen()),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _QuickActionCard(
+                        icon: Icons.assured_workload_rounded,
+                        label: 'Gov\nIntegration',
+                        color: const Color(0xFF1A237E),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const GovernmentScreen()),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: _QuickActionCard(
+                        icon: Icons.person_outline_rounded,
+                        label: 'Profile\n& Settings',
+                        color: const Color(0xFF7B68EE),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const ProfileScreen()),
                         ),
                       ),
                     ),

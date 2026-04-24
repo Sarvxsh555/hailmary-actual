@@ -10,7 +10,7 @@ router = APIRouter(prefix="/records", tags=["Records"])
 
 
 class RecordCreateRequest(BaseModel):
-    user_id: str = "student_001"
+    user_id: str = "patient_001"
     type: str  # 'xray', 'vitals', 'emergency'
     result_summary: str = ""
     risk_level: str = "LOW"

@@ -12,7 +12,7 @@ def trigger_emergency(user_id: str, location: str, description: str) -> dict:
     Log a new emergency event and simulate alerting.
 
     Args:
-        user_id: ID of the student triggering the emergency
+        user_id: ID of the patient triggering the emergency
         location: Location description
         description: Additional context
 
@@ -56,8 +56,8 @@ def _mock_notify(event: dict) -> None:
     In production, this would integrate with SMS/push/email services.
     """
     notifications = [
-        f"[NOTIFY] Campus Health Center alerted for event {event['id']}",
-        f"[NOTIFY] Hostel Warden notified — Location: {event['location']}",
+        f"[NOTIFY] Emergency Health Center alerted for event {event['id']}",
+        f"[NOTIFY] Emergency contacts notified — Location: {event['location']}",
         f"[NOTIFY] Emergency contact SMS queued for user {event['user_id']}",
     ]
 

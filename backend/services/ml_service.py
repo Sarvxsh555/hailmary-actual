@@ -48,7 +48,7 @@ def analyze_xray(age: int, gender: str, symptoms: str, duration: str) -> dict:
         recommendation = (
             "Signs consistent with pneumonia detected. "
             "Recommend chest CT and blood work. "
-            "Visit campus health center within 24 hours."
+            "Visit a local health center within 24 hours."
         )
     else:
         prediction = "NORMAL"
@@ -87,7 +87,7 @@ def process_vitals(
         red_signal: Red channel intensity values
         blue_signal: Blue channel intensity values (proxy for IR)
         duration: Measurement duration in seconds
-        user_id: Student identifier
+        user_id: Patient identifier
 
     Returns:
         Mocked vitals result matching expected schema

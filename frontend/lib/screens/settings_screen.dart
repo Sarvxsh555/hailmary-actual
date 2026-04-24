@@ -12,7 +12,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  final _nameController = TextEditingController(text: 'Student User');
+  final _nameController = TextEditingController(text: 'Patient User');
   final _idController = TextEditingController(text: 'STU-2026-001');
   bool _notificationsEnabled = true;
 
@@ -92,7 +92,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
 
-                  // Student ID
+                  // Patient ID
                   TextField(
                     controller: _idController,
                     textAlign: TextAlign.center,
@@ -102,7 +102,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Student ID',
+                      hintText: 'Patient ID',
                       hintStyle: GoogleFonts.inter(color: AppColors.textTertiary),
                     ),
                   ),
@@ -231,7 +231,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Emergency-first, AI-assisted health response for campus students. Designed to reduce the time between a health issue and action.',
+                    'Emergency-first, AI-assisted health response. Designed to reduce the time between a health issue and action.',
                     style: GoogleFonts.inter(
                       fontSize: 13,
                       color: AppColors.textSecondary,

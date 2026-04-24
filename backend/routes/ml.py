@@ -52,7 +52,7 @@ async def analyze_xray_endpoint(
 
     # Auto-save to records
     create_record_from_analysis(
-        user_id="student_001",  # In production: extract from auth token
+        user_id="patient_001",  # In production: extract from auth token
         analysis_result=result,
     )
 
@@ -66,7 +66,7 @@ class VitalsRequest(BaseModel):
     red_signal: list[float] = []
     blue_signal: list[float] = []
     duration: float = 0.0
-    user_id: str = "student_001"
+    user_id: str = "patient_001"
 
 
 @router.post("/vitals")

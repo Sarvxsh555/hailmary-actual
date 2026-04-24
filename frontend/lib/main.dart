@@ -1,9 +1,19 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'app.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isAndroid) {
+    try {
+      await FlutterDisplayMode.setHighRefreshRate();
+    } catch (_) {
+      // Ignore errors if the device doesn't support refresh rate changes
+    }
+  }
 
   // Set system UI overlay style for a premium feel
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(

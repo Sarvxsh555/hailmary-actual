@@ -55,7 +55,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
     return [
       HealthRecord(
         id: 'rec_001',
-        userId: 'student_001',
+        userId: 'patient_001',
         type: 'xray',
         date: '2026-04-23T15:30:00',
         resultSummary: 'TB Detected — High Risk',
@@ -68,7 +68,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
       ),
       HealthRecord(
         id: 'rec_002',
-        userId: 'student_001',
+        userId: 'patient_001',
         type: 'vitals',
         date: '2026-04-23T14:00:00',
         resultSummary: 'HR: 78 BPM • SpO₂: 97%',
@@ -81,19 +81,19 @@ class _RecordsScreenState extends State<RecordsScreen> {
       ),
       HealthRecord(
         id: 'rec_003',
-        userId: 'student_001',
+        userId: 'patient_001',
         type: 'emergency',
         date: '2026-04-22T22:15:00',
         resultSummary: 'Emergency triggered — Dispatched',
         riskLevel: 'HIGH',
         details: {
-          'location': 'Hostel Block A',
+          'location': 'Home',
           'status': 'RESOLVED',
         },
       ),
       HealthRecord(
         id: 'rec_004',
-        userId: 'student_001',
+        userId: 'patient_001',
         type: 'vitals',
         date: '2026-04-21T10:30:00',
         resultSummary: 'HR: 72 BPM • SpO₂: 98%',
@@ -106,7 +106,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
       ),
       HealthRecord(
         id: 'rec_005',
-        userId: 'student_001',
+        userId: 'patient_001',
         type: 'xray',
         date: '2026-04-20T09:00:00',
         resultSummary: 'Normal — No abnormalities',
