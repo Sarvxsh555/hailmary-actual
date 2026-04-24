@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../theme/app_theme.dart';
 import '../widgets/glass_card.dart';
+import '../widgets/tb_map_widget.dart';
 import '../services/api_service.dart';
 
 class EmergencyScreen extends StatefulWidget {
@@ -86,10 +87,16 @@ class _EmergencyScreenState extends State<EmergencyScreen>
         title: Text('Emergency', style: GoogleFonts.outfit(fontWeight: FontWeight.w600)),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: _sending ? _buildSendingState() : _buildResultState(),
-        ),
+        child: _sending
+            ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: _buildSendingState(),
+              )
+            : SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: _buildResultState(),
+              ),
       ),
     );
   }
@@ -153,52 +160,61 @@ class _EmergencyScreenState extends State<EmergencyScreen>
 
   Widget _buildResultState() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Spacer(),
-        // Success animation
-        ScaleTransition(
-          scale: _checkAnimation,
-          child: Container(
-            width: 120,
-            height: 120,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.safe.withValues(alpha: 0.12),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.safe.withValues(alpha: 0.15),
-                  blurRadius: 40,
-                  spreadRadius: 5,
-                ),
-              ],
-            ),
-            child: const Icon(
-              Icons.check_rounded,
-              color: AppColors.safe,
-              size: 56,
+        const SizedBox(height: 32),
+
+        // ── Success animation ──
+        Center(
+          child: ScaleTransition(
+            scale: _checkAnimation,
+            child: Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.safe.withValues(alpha: 0.12),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.safe.withValues(alpha: 0.15),
+                    blurRadius: 40,
+                    spreadRadius: 5,
+                  ),
+                ],
+              ),
+              child: const Icon(
+                Icons.check_rounded,
+                color: AppColors.safe,
+                size: 56,
+              ),
             ),
           ),
         ),
+
         const SizedBox(height: 28),
-        Text(
-          'Alert Sent Successfully',
-          style: GoogleFonts.outfit(
-            fontSize: 26,
-            fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
+        Center(
+          child: Text(
+            'Alert Sent Successfully',
+            style: GoogleFonts.outfit(
+              fontSize: 26,
+              fontWeight: FontWeight.w700,
+              color: AppColors.textPrimary,
+            ),
           ),
         ),
         const SizedBox(height: 8),
-        Text(
-          'Help is on the way',
-          style: GoogleFonts.inter(
-            fontSize: 16,
-            color: AppColors.textSecondary,
+        Center(
+          child: Text(
+            'Help is on the way',
+            style: GoogleFonts.inter(
+              fontSize: 16,
+              color: AppColors.textSecondary,
+            ),
           ),
         ),
         const SizedBox(height: 36),
 
-        // Details card
+        // ── Details card ──
         GlassCard(
           padding: const EdgeInsets.all(24),
           child: Column(
@@ -219,7 +235,7 @@ class _EmergencyScreenState extends State<EmergencyScreen>
 
         const SizedBox(height: 20),
 
-        // Mock notifications
+        // ── Notifications card ──
         GlassCard(
           accentColor: AppColors.info,
           padding: const EdgeInsets.all(20),
@@ -249,9 +265,86 @@ class _EmergencyScreenState extends State<EmergencyScreen>
           ),
         ),
 
-        const Spacer(),
+        const SizedBox(height: 28),
 
-        // Back button
+        // ── Map section header ──
+        Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: AppColors.emergency.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Icon(
+                Icons.local_hospital_rounded,
+                color: AppColors.emergency,
+                size: 20,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Nearby TB / DOTS Centres',
+                    style: GoogleFonts.outfit(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                  Text(
+                    'Real-time · OpenStreetMap · 5 km radius',
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+
+        const SizedBox(height: 12),
+
+        // ── Map widget ──
+        Container(
+          height: 400,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.08),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          child: const TBMapWidget(),
+        ),
+
+        const SizedBox(height: 16),
+
+        // ── Map legend ──
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _LegendDot(color: AppColors.info, label: 'You'),
+            const SizedBox(width: 16),
+            _LegendDot(color: AppColors.emergency, label: 'Hospital'),
+            const SizedBox(width: 16),
+            _LegendDot(color: AppColors.safe, label: 'Clinic / DOTS'),
+            const SizedBox(width: 16),
+            _LegendDot(color: AppColors.info, label: 'Doctor', isOutline: true),
+          ],
+        ),
+
+        const SizedBox(height: 28),
+
+        // ── Back button ──
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
@@ -273,6 +366,7 @@ class _EmergencyScreenState extends State<EmergencyScreen>
             ),
           ),
         ),
+
         const SizedBox(height: 32),
       ],
     );
@@ -371,6 +465,44 @@ class _NotifItem extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _LegendDot extends StatelessWidget {
+  final Color color;
+  final String label;
+  final bool isOutline;
+
+  const _LegendDot({
+    required this.color,
+    required this.label,
+    this.isOutline = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(
+            color: isOutline ? Colors.transparent : color,
+            shape: BoxShape.circle,
+            border: isOutline ? Border.all(color: color, width: 2) : null,
+          ),
+        ),
+        const SizedBox(width: 5),
+        Text(
+          label,
+          style: GoogleFonts.inter(
+            fontSize: 11,
+            color: AppColors.textSecondary,
+          ),
+        ),
+      ],
     );
   }
 }
