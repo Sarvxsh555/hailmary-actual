@@ -10,6 +10,7 @@ import 'upload_screen.dart';
 import 'monitor_screen.dart';
 import 'profile_screen.dart';
 import 'emergency_screen.dart';
+import 'tb_map_screen.dart';
 
 class PatientMainScreen extends StatefulWidget {
   const PatientMainScreen({super.key});
@@ -26,6 +27,7 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
     CoughScreen(),
     UploadScreen(),
     MonitorScreen(),
+    TBMapScreen(),
     GovernmentScreen(),
     ProfileScreen(),
   ];
@@ -86,6 +88,7 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
           CustomNavItem(icon: Icons.graphic_eq_rounded, label: 'Cough'),
           CustomNavItem(icon: Icons.medical_information_outlined, label: 'X-Ray'),
           CustomNavItem(icon: Icons.timeline_rounded, label: 'Monitor'),
+          CustomNavItem(icon: Icons.map_rounded, label: 'Map'),
           CustomNavItem(icon: Icons.account_balance_rounded, label: 'Gov'),
           CustomNavItem(icon: Icons.person_rounded, label: 'Profile'),
         ],

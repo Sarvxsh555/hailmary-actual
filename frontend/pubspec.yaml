@@ -22,7 +22,16 @@ dependencies:
   sensors_plus: ^5.0.1
   flutter_displaymode: ^0.6.0
   google_maps_flutter: ^2.14.2
-  geolocator: ^14.0.2
+  geolocator: ^13.0.2
+  # Map & location (OpenStreetMap)
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+  http: ^1.2.0
+  url_launcher: ^6.2.5
+  pdf: ^3.10.8
+  printing: ^5.12.0
+  share_plus: ^13.1.0
+  path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_test:

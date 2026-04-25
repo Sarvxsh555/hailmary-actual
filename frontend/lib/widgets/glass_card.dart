@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 
 class GlassCard extends StatelessWidget {
   final Widget child;
@@ -15,10 +16,10 @@ class GlassCard extends StatelessWidget {
     required this.child,
     this.padding,
     this.margin,
-    this.borderRadius = 32,
+    this.borderRadius = 20,
     this.accentColor,
     this.onTap,
-    this.blurAmount = 20,
+    this.blurAmount = 8,
   });
 
   @override
@@ -31,22 +32,42 @@ class GlassCard extends StatelessWidget {
           padding: padding ?? const EdgeInsets.all(20),
           margin: margin,
           decoration: BoxDecoration(
-            color: accentColor != null
-                ? accentColor!.withValues(alpha: 0.08)
-                : Colors.white.withValues(alpha: 0.25),
+            gradient: accentColor != null
+                ? LinearGradient(
+                    colors: [
+                      accentColor!.withOpacity(0.10),
+                      accentColor!.withOpacity(0.04),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : LinearGradient(
+                    colors: [
+                      AppColors.surfaceAlt.withOpacity(0.95),
+                      AppColors.surface.withOpacity(0.80),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
             borderRadius: BorderRadius.circular(borderRadius),
             border: Border.all(
               color: accentColor != null
-                  ? accentColor!.withValues(alpha: 0.15)
-                  : Colors.white.withValues(alpha: 0.3),
+                  ? accentColor!.withOpacity(0.25)
+                  : AppColors.divider,
               width: 1,
             ),
             boxShadow: [
               BoxShadow(
-                color: (accentColor ?? Colors.black).withValues(alpha: 0.04),
-                blurRadius: 24,
+                color: Colors.black.withOpacity(0.35),
+                blurRadius: 20,
                 offset: const Offset(0, 8),
               ),
+              if (accentColor != null)
+                BoxShadow(
+                  color: accentColor!.withOpacity(0.08),
+                  blurRadius: 24,
+                  offset: const Offset(0, 4),
+                ),
             ],
           ),
           child: child,
@@ -55,10 +76,7 @@ class GlassCard extends StatelessWidget {
     );
 
     if (onTap != null) {
-      return GestureDetector(
-        onTap: onTap,
-        child: card,
-      );
+      return GestureDetector(onTap: onTap, child: card);
     }
     return card;
   }

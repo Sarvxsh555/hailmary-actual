@@ -8,14 +8,18 @@ class HailMaryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Always initialise as dark clinical theme
+    AppTheme.setUpThemeColors(ThemeMode.dark);
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: ThemeProvider.instance,
       builder: (context, mode, child) {
+        AppTheme.setUpThemeColors(ThemeMode.dark);
         return MaterialApp(
           title: 'HailMary Health',
           debugShowCheckedModeBanner: false,
-          theme: AppTheme.lightTheme,
-          themeMode: mode,
+          theme: AppTheme.darkTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: ThemeMode.dark,
           home: const SplashScreen(),
         );
       },
