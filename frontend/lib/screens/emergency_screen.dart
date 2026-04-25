@@ -116,7 +116,7 @@ class _EmergencyScreenState extends State<EmergencyScreen>
                     ),
                   ],
                 ),
-                child: const Center(
+                child: Center(
                   child: SizedBox(
                     width: 40,
                     height: 40,
@@ -172,7 +172,7 @@ class _EmergencyScreenState extends State<EmergencyScreen>
                 ),
               ],
             ),
-            child: const Icon(
+            child: Icon(
               Icons.check_rounded,
               color: AppColors.safe,
               size: 56,

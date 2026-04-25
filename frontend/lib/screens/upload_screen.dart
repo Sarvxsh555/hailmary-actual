@@ -178,7 +178,7 @@ class _UploadScreenState extends State<UploadScreen> {
                             color: AppColors.info.withValues(alpha: 0.08),
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.add_photo_alternate_outlined,
                             color: AppColors.info,
                             size: 32,

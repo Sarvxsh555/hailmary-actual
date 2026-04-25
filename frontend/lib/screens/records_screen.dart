@@ -183,7 +183,7 @@ class _RecordsScreenState extends State<RecordsScreen> {
           // ── Records List ──
           Expanded(
             child: _isLoading
-                ? const Center(
+                ? Center(
                     child: CircularProgressIndicator(
                       color: AppColors.info,
                       strokeWidth: 2,

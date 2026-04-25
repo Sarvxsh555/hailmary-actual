@@ -6,11 +6,8 @@ import '../widgets/hailmary_button.dart';
 import 'emergency_screen.dart';
 import 'upload_screen.dart';
 import 'vitals_screen.dart';
-import 'records_screen.dart';
-import 'profile_screen.dart';
 import 'cough_screen.dart';
 import 'government_screen.dart';
-import 'dots_map_screen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -104,10 +101,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       ],
                     ),
                     GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => const ProfileScreen()),
-                      ),
+                      onTap: () {
+                        // The user icon can just tap locally or we disable it 
+                        // since Profile is now in the taskbar. For now, doing nothing.
+                      },
                       child: Container(
                         width: 48,
                         height: 48,
@@ -115,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           color: AppColors.info.withValues(alpha: 0.1),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.person_outline_rounded,
                           color: AppColors.info,
                           size: 24,
@@ -149,113 +146,203 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
                 const SizedBox(height: 44),
 
-                // ── Quick Actions ──
+                // ── Multimodal Monitoring Dashboard ──
                 Text(
-                  'Quick Actions',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  'MULTIMODAL MONITORING',
+                  style: GoogleFonts.inter(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.5,
+                    color: AppColors.textTertiary,
+                  ),
                 ),
                 const SizedBox(height: 16),
-
+                
+                // Grid
                 Row(
                   children: [
-                    Expanded(
-                      child: _QuickActionCard(
-                        icon: Icons.medical_information_outlined,
-                        label: 'Upload\nX-Ray',
-                        color: AppColors.info,
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const UploadScreen()),
-                        ),
-                      ),
-                    ),
+                    Expanded(child: _MonitoringCard(icon: '🗣️', title: 'Cough Acoustics', value: '0.71', subtitle: 'Recovery Index', weight: '30%')),
                     const SizedBox(width: 14),
-                    Expanded(
-                      child: _QuickActionCard(
-                        icon: Icons.edit_note_rounded,
-                        label: 'Cough\nAnalysis',
-                        color: AppColors.warning,
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const CoughScreen()),
-                        ),
-                      ),
-                    ),
+                    Expanded(child: _MonitoringCard(icon: '🫁', title: 'Chest X-Ray / CV', value: 'Mild', valueColor: AppColors.warning, subtitle: 'White patch detected', weight: '')),
                   ],
                 ),
                 const SizedBox(height: 14),
                 Row(
                   children: [
-                    Expanded(
-                      child: _QuickActionCard(
-                        icon: Icons.favorite_outline_rounded,
-                        label: 'Measure\nVitals',
-                        color: AppColors.emergency,
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const VitalsScreen()),
-                        ),
-                      ),
-                    ),
+                    Expanded(child: _MonitoringCard(icon: '💊', title: 'Med. Adherence', value: '93%', subtitle: '14-day window', weight: '20%')),
                     const SizedBox(width: 14),
-                    Expanded(
-                      child: _QuickActionCard(
-                        icon: Icons.folder_outlined,
-                        label: 'View\nRecords',
-                        color: AppColors.safe,
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const RecordsScreen()),
-                        ),
-                      ),
-                    ),
+                    Expanded(child: _MonitoringCard(icon: '🩸', title: 'SpO₂ Monitor', value: '97%', valueColor: AppColors.safe, subtitle: 'Camera PPG · Normal', weight: '+10% override')),
                   ],
                 ),
                 const SizedBox(height: 14),
                 Row(
                   children: [
-                    Expanded(
-                      child: _QuickActionCard(
-                        icon: Icons.assured_workload_rounded,
-                        label: 'Gov\nIntegration',
-                        color: const Color(0xFF1A237E),
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const GovernmentScreen()),
-                        ),
-                      ),
-                    ),
+                    Expanded(child: _MonitoringCard(icon: '😮‍💨', title: 'Breathlessness', value: 'mMRC 1', valueColor: AppColors.safe, subtitle: 'Mild, hurrying only', weight: '20%')),
                     const SizedBox(width: 14),
-                    Expanded(
-                      child: _QuickActionCard(
-                        icon: Icons.person_outline_rounded,
-                        label: 'Profile\n& Settings',
-                        color: const Color(0xFF7B68EE),
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const ProfileScreen()),
-                        ),
-                      ),
-                    ),
+                    Expanded(child: _MonitoringCard(icon: '⚖️', title: 'Weight Track', value: '+0.8kg', valueColor: AppColors.textPrimary, subtitle: 'This fortnight', weight: '10%')),
                   ],
                 ),
-                const SizedBox(height: 14),
-                Row(
-                  children: [
-                    Expanded(
-                      child: _QuickActionCard(
-                        icon: Icons.pin_drop_outlined,
-                        label: 'Find DOTS\nCenters',
-                        color: const Color(0xFF00BFA5),
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const DotsMapScreen()),
+                
+                const SizedBox(height: 20),
+                
+                // Alert Banner
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.warning.withOpacity(0.08),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: AppColors.warning.withOpacity(0.2),
+                    ),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.warning_amber_rounded, color: AppColors.warning, size: 20),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          '2 missed doses this week — ASHA worker Lakshmi Devi has been alerted.',
+                          style: GoogleFonts.inter(
+                            fontSize: 13,
+                            color: AppColors.warning,
+                            fontWeight: FontWeight.w500,
+                            height: 1.4,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 14),
-                    const Expanded(child: SizedBox()),
-                  ],
+                    ],
+                  ),
+                ),
+                
+                const SizedBox(height: 32),
+                
+                // ── 8-Week TPS Trend ──
+                Text(
+                  '8-WEEK TPS TREND',
+                  style: GoogleFonts.inter(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.5,
+                    color: AppColors.textTertiary,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                
+                GlassCard(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Treatment Progress',
+                            style: GoogleFonts.outfit(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textPrimary,
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF1A237E).withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.account_balance_rounded, size: 12, color: Color(0xFF1A237E)),
+                                const SizedBox(width: 6),
+                                Text(
+                                  'Ni-Kshay Synced',
+                                  style: GoogleFonts.inter(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFF1A237E),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 24),
+                      
+                      // Bar Chart
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _TrendBar(height: 30, label: 'W1', isCurrent: false),
+                          _TrendBar(height: 35, label: 'W2', isCurrent: false),
+                          _TrendBar(height: 42, label: 'W3', isCurrent: false),
+                          _TrendBar(height: 48, label: 'W4', isCurrent: false),
+                          _TrendBar(height: 52, label: 'W5', isCurrent: false),
+                          _TrendBar(height: 58, label: 'W6', isCurrent: false),
+                          _TrendBar(height: 60, label: 'W7', isCurrent: false),
+                          _TrendBar(height: 65, label: 'W8', isCurrent: true),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                
+                const SizedBox(height: 14),
+                
+                // Integration Live Card
+                GlassCard(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF1A237E).withOpacity(0.08),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(Icons.account_balance_rounded, color: Color(0xFF1A237E), size: 24),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Ni-Kshay / ASHA Integration',
+                              style: GoogleFonts.outfit(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.textPrimary,
+                              ),
+                            ),
+                            Text(
+                              'Last sync: Today 09:30 AM · ID linked · FHIR R4',
+                              style: GoogleFonts.inter(
+                                fontSize: 11,
+                                color: AppColors.textTertiary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: AppColors.safe.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(width: 6, height: 6, decoration: BoxDecoration(color: AppColors.safe, shape: BoxShape.circle)),
+                            const SizedBox(width: 4),
+                            Text('LIVE', style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.safe, letterSpacing: 0.5)),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
 
                 const SizedBox(height: 32),
@@ -273,7 +360,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           color: AppColors.safe.withValues(alpha: 0.15),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.shield_outlined,
                           color: AppColors.safe,
                           size: 22,
@@ -331,73 +418,113 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   }
 }
 
-// ── Quick Action Card ──────────────────────────────────────────
+// ── Monitoring Card ──────────────────────────────────────────
 
-class _QuickActionCard extends StatefulWidget {
-  final IconData icon;
-  final String label;
-  final Color color;
-  final VoidCallback onTap;
+class _MonitoringCard extends StatelessWidget {
+  final String icon;
+  final String title;
+  final String value;
+  final Color? valueColor;
+  final String subtitle;
+  final String weight;
 
-  const _QuickActionCard({
+  const _MonitoringCard({
     required this.icon,
-    required this.label,
-    required this.color,
-    required this.onTap,
+    required this.title,
+    required this.value,
+    this.valueColor,
+    required this.subtitle,
+    required this.weight,
   });
 
   @override
-  State<_QuickActionCard> createState() => _QuickActionCardState();
+  Widget build(BuildContext context) {
+    return GlassCard(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(icon, style: const TextStyle(fontSize: 20)),
+          const SizedBox(height: 12),
+          Text(
+            title,
+            style: GoogleFonts.inter(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: AppColors.textSecondary,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: GoogleFonts.outfit(
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+              color: valueColor ?? AppColors.textPrimary,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            subtitle,
+            style: GoogleFonts.inter(
+              fontSize: 11,
+              color: AppColors.textTertiary,
+            ),
+          ),
+          if (weight.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Text(
+              'Weight: $weight',
+              style: GoogleFonts.inter(
+                fontSize: 10,
+                color: AppColors.textTertiary.withOpacity(0.6),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
 }
 
-class _QuickActionCardState extends State<_QuickActionCard> {
-  bool _isPressed = false;
+// ── Trend Bar ──────────────────────────────────────────
+
+class _TrendBar extends StatelessWidget {
+  final double height;
+  final String label;
+  final bool isCurrent;
+
+  const _TrendBar({
+    required this.height,
+    required this.label,
+    required this.isCurrent,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) => setState(() => _isPressed = true),
-      onTapUp: (_) {
-        setState(() => _isPressed = false);
-        widget.onTap();
-      },
-      onTapCancel: () => setState(() => _isPressed = false),
-      child: AnimatedScale(
-        scale: _isPressed ? 0.96 : 1.0,
-        duration: const Duration(milliseconds: 120),
-        child: GlassCard(
-          accentColor: widget.color,
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: widget.color.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Icon(
-                  widget.icon,
-                  color: widget.color,
-                  size: 24,
-                ),
-              ),
-              const SizedBox(height: 14),
-              Text(
-                widget.label,
-                style: GoogleFonts.outfit(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
-                  height: 1.3,
-                ),
-              ),
-            ],
+    return Column(
+      children: [
+        Container(
+          width: 32,
+          height: height,
+          decoration: BoxDecoration(
+            color: isCurrent 
+                ? AppColors.warning.withOpacity(0.4) 
+                : AppColors.safe.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(6),
+            border: isCurrent ? Border.all(color: AppColors.warning.withOpacity(0.8), width: 1.5) : null,
           ),
         ),
-      ),
+        const SizedBox(height: 8),
+        Text(
+          label,
+          style: GoogleFonts.inter(
+            fontSize: 10,
+            fontWeight: isCurrent ? FontWeight.w700 : FontWeight.w500,
+            color: isCurrent ? AppColors.warning : AppColors.textTertiary,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -442,7 +569,7 @@ class _EmergencyConfirmDialog extends StatelessWidget {
                   color: AppColors.emergencyLight,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.emergency_rounded,
                   color: AppColors.emergency,
                   size: 32,

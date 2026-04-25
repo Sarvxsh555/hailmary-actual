@@ -15,7 +15,7 @@ class GlassCard extends StatelessWidget {
     required this.child,
     this.padding,
     this.margin,
-    this.borderRadius = 24,
+    this.borderRadius = 32,
     this.accentColor,
     this.onTap,
     this.blurAmount = 20,

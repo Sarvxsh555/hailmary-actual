@@ -238,7 +238,7 @@ class _ResultsScreenState extends State<ResultsScreen>
                         color: AppColors.info.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.lightbulb_outline_rounded,
                         color: AppColors.info,
                         size: 20,

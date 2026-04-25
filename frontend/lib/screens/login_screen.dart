@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../theme/app_theme.dart';
-import 'home_screen.dart';
+import 'patient_main_screen.dart';
 import 'doctor_screen.dart';
 
 enum UserRole { patient, doctor }
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen>
 
       final destination = _selectedRole == UserRole.doctor
           ? const DoctorScreen()
-          : const HomeScreen();
+          : const PatientMainScreen();
 
       Navigator.pushReplacement(
         context,
@@ -498,7 +498,7 @@ class _LoginScreenState extends State<LoginScreen>
                         Navigator.pushReplacement(
                           context,
                           PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => const HomeScreen(),
+                            pageBuilder: (_, __, ___) => const PatientMainScreen(),
                             transitionsBuilder: (_, animation, __, child) {
                               return FadeTransition(
                                   opacity: animation, child: child);

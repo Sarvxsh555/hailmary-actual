@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../theme/app_theme.dart';
 import '../widgets/glass_card.dart';
 import 'login_screen.dart';
+import '../widgets/custom_bottom_nav.dart';
 
 class DoctorScreen extends StatefulWidget {
   const DoctorScreen({super.key});
@@ -141,7 +142,7 @@ class _DoctorScreenState extends State<DoctorScreen>
                   color: AppColors.warningLight,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.logout_rounded,
                   color: AppColors.warning,
                   size: 28,
@@ -234,7 +235,18 @@ class _DoctorScreenState extends State<DoctorScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
+      extendBody: true,
+      bottomNavigationBar: CustomBottomNav(
+        selectedIndex: _selectedTab,
+        onItemSelected: (index) => setState(() => _selectedTab = index),
+        items: [
+          CustomNavItem(icon: Icons.dashboard_outlined, label: 'Overview'),
+          CustomNavItem(icon: Icons.people_outline_rounded, label: 'Patients'),
+          CustomNavItem(icon: Icons.warning_amber_rounded, label: 'Alerts'),
+        ],
+      ),
       body: SafeArea(
+        bottom: false,
         child: FadeTransition(
           opacity: _fadeAnimation,
           child: Column(
@@ -279,7 +291,7 @@ class _DoctorScreenState extends State<DoctorScreen>
                                 color: AppColors.safe.withValues(alpha: 0.1),
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.notifications_outlined,
                                 color: AppColors.safe,
                                 size: 22,
@@ -338,44 +350,6 @@ class _DoctorScreenState extends State<DoctorScreen>
                       ],
                     ),
                   ],
-                ),
-              ),
-
-              // ── Tab Bar ──
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.5),
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: AppColors.divider),
-                  ),
-                  child: Row(
-                    children: [
-                      _DoctorTab(
-                        label: 'Overview',
-                        icon: Icons.dashboard_outlined,
-                        isSelected: _selectedTab == 0,
-                        onTap: () => setState(() => _selectedTab = 0),
-                      ),
-                      _DoctorTab(
-                        label: 'Patients',
-                        icon: Icons.people_outline_rounded,
-                        isSelected: _selectedTab == 1,
-                        onTap: () => setState(() => _selectedTab = 1),
-                      ),
-                      _DoctorTab(
-                        label: 'Alerts',
-                        icon: Icons.warning_amber_rounded,
-                        isSelected: _selectedTab == 2,
-                        onTap: () => setState(() => _selectedTab = 2),
-                        badgeCount: _emergencyAlerts
-                            .where((a) => !a.isResolved)
-                            .length,
-                      ),
-                    ],
-                  ),
                 ),
               ),
 
@@ -641,97 +615,6 @@ class _DoctorScreenState extends State<DoctorScreen>
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (ctx) => _PatientDetailSheet(patient: patient),
-    );
-  }
-}
-
-// ══════════════════════════════════════════════════════════════════════
-//  WIDGET: Doctor Tab
-// ══════════════════════════════════════════════════════════════════════
-
-class _DoctorTab extends StatelessWidget {
-  final String label;
-  final IconData icon;
-  final bool isSelected;
-  final VoidCallback onTap;
-  final int badgeCount;
-
-  const _DoctorTab({
-    required this.label,
-    required this.icon,
-    required this.isSelected,
-    required this.onTap,
-    this.badgeCount = 0,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          decoration: BoxDecoration(
-            color: isSelected ? Colors.white : Colors.transparent,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: isSelected
-                ? [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.05),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ]
-                : [],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                size: 16,
-                color: isSelected
-                    ? AppColors.textPrimary
-                    : AppColors.textTertiary,
-              ),
-              const SizedBox(width: 5),
-              Text(
-                label,
-                style: GoogleFonts.inter(
-                  fontSize: 12,
-                  fontWeight:
-                      isSelected ? FontWeight.w600 : FontWeight.w400,
-                  color: isSelected
-                      ? AppColors.textPrimary
-                      : AppColors.textTertiary,
-                ),
-              ),
-              if (badgeCount > 0) ...[
-                const SizedBox(width: 5),
-                Container(
-                  width: 18,
-                  height: 18,
-                  decoration: const BoxDecoration(
-                    color: AppColors.emergency,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Text(
-                      '$badgeCount',
-                      style: GoogleFonts.inter(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
@@ -1131,7 +1014,7 @@ class _PatientDetailSheet extends StatelessWidget {
       minChildSize: 0.4,
       builder: (_, controller) {
         return Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: AppColors.background,
             borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
           ),

@@ -162,7 +162,7 @@ class _DotsMapScreenState extends State<DotsMapScreen> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return const Scaffold(
+      return Scaffold(
         backgroundColor: AppColors.background,
         body: Center(
           child: CircularProgressIndicator(color: AppColors.info),
@@ -177,7 +177,7 @@ class _DotsMapScreenState extends State<DotsMapScreen> {
         elevation: 0,
         scrolledUnderElevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.textPrimary),
+          icon: Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.textPrimary),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
@@ -220,7 +220,7 @@ class _DotsMapScreenState extends State<DotsMapScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Row(
                 children: [
-                  const Icon(Icons.search_rounded, color: AppColors.textSecondary),
+                  Icon(Icons.search_rounded, color: AppColors.textSecondary),
                   const SizedBox(width: 12),
                   Text(
                     'Search nearby clinics...',
@@ -281,7 +281,7 @@ class _DotsMapScreenState extends State<DotsMapScreen> {
                         const SizedBox(height: 12),
                         Row(
                           children: [
-                            const Icon(Icons.location_on_outlined, size: 16, color: AppColors.textSecondary),
+                            Icon(Icons.location_on_outlined, size: 16, color: AppColors.textSecondary),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
@@ -297,7 +297,7 @@ class _DotsMapScreenState extends State<DotsMapScreen> {
                         const SizedBox(height: 8),
                         Row(
                           children: [
-                            const Icon(Icons.access_time_rounded, size: 16, color: AppColors.textSecondary),
+                            Icon(Icons.access_time_rounded, size: 16, color: AppColors.textSecondary),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
@@ -316,8 +316,8 @@ class _DotsMapScreenState extends State<DotsMapScreen> {
                           child: ElevatedButton(
                             onPressed: () {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Navigation feature coming soon!'),
+                                SnackBar(
+                                  content: const Text('Navigation feature coming soon!'),
                                   backgroundColor: AppColors.info,
                                 ),
                               );
@@ -355,7 +355,7 @@ class _DotsMapScreenState extends State<DotsMapScreen> {
                 padding: const EdgeInsets.all(16),
                 child: Row(
                   children: [
-                    const Icon(Icons.location_off_rounded, color: AppColors.warning),
+                    Icon(Icons.location_off_rounded, color: AppColors.warning),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(

@@ -3,27 +3,29 @@ import '../theme/app_theme.dart';
 
 class PulseWaveform extends StatelessWidget {
   final List<double> data;
-  final Color color;
+  final Color? color;
   final double height;
   final double strokeWidth;
 
   const PulseWaveform({
     super.key,
     required this.data,
-    this.color = AppColors.emergency,
+    this.color,
     this.height = 120,
     this.strokeWidth = 2.5,
   });
 
   @override
   Widget build(BuildContext context) {
+    final activeColor = color ?? AppColors.emergency;
+    
     return SizedBox(
       height: height,
       width: double.infinity,
       child: CustomPaint(
         painter: _WaveformPainter(
           data: data,
-          color: color,
+          color: activeColor,
           strokeWidth: strokeWidth,
         ),
       ),

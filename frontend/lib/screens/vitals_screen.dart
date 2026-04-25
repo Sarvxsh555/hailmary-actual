@@ -11,7 +11,8 @@ import '../widgets/pulse_waveform.dart';
 // import '../models/vitals_result.dart';
 
 class VitalsScreen extends StatefulWidget {
-  const VitalsScreen({super.key});
+  final bool isEmbedded;
+  const VitalsScreen({super.key, this.isEmbedded = false});
 
   @override
   State<VitalsScreen> createState() => _VitalsScreenState();
@@ -284,7 +285,7 @@ class _VitalsScreenState extends State<VitalsScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
+      appBar: widget.isEmbedded ? null : AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
           onPressed: () {
@@ -364,7 +365,7 @@ class _VitalsScreenState extends State<VitalsScreen>
                     ? CameraPreview(_cameraController!)
                     : Container(
                         color: AppColors.shimmer,
-                        child: const Center(
+                        child: Center(
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
                             color: AppColors.info,
@@ -564,7 +565,7 @@ class _VitalsScreenState extends State<VitalsScreen>
               shape: BoxShape.circle,
               color: AppColors.safe.withValues(alpha: 0.12),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.check_circle_outline_rounded,
               color: AppColors.safe,
               size: 40,

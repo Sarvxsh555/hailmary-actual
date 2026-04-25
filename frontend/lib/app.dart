@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'theme/app_theme.dart';
+import 'theme/theme_provider.dart';
 import 'screens/splash_screen.dart';
 
 class HailMaryApp extends StatelessWidget {
@@ -7,11 +8,17 @@ class HailMaryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'HailMary Health',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      home: const SplashScreen(),
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: ThemeProvider.instance,
+      builder: (context, mode, child) {
+        return MaterialApp(
+          title: 'HailMary Health',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          themeMode: mode,
+          home: const SplashScreen(),
+        );
+      },
     );
   }
 }

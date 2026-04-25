@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../theme/app_theme.dart';
+import '../theme/theme_provider.dart';
 import '../widgets/glass_card.dart';
 import 'login_screen.dart';
 
@@ -70,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   color: AppColors.warningLight,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.logout_rounded,
+                child: Icon(Icons.logout_rounded,
                     color: AppColors.warning, size: 28),
               ),
               const SizedBox(height: 18),
@@ -268,6 +269,20 @@ class _ProfileScreenState extends State<ProfileScreen>
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Column(
                   children: [
+                    ValueListenableBuilder<ThemeMode>(
+                      valueListenable: ThemeProvider.instance,
+                      builder: (context, _, __) {
+                        return _ToggleTile(
+                          icon: Icons.dark_mode_rounded,
+                          title: 'Dark Mode',
+                          subtitle: 'Deep slate medical aesthetic',
+                          value: ThemeProvider.instance.isDarkMode,
+                          onChanged: (v) => ThemeProvider.instance.toggleTheme(),
+                          color: const Color(0xFF7B68EE),
+                        );
+                      },
+                    ),
+                    const Divider(height: 1, indent: 60),
                     _ToggleTile(
                       icon: Icons.wifi_off_rounded,
                       title: 'Offline Mode',
@@ -618,7 +633,7 @@ class _LanguageTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child:
-            const Icon(Icons.translate_rounded, color: AppColors.safe, size: 20),
+            Icon(Icons.translate_rounded, color: AppColors.safe, size: 20),
       ),
       title: Text(
         'Language',

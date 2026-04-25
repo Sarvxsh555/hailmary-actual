@@ -142,7 +142,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     icon: Icons.contact_phone_outlined,
                     title: 'Emergency Contacts',
                     subtitle: 'Add or edit contacts',
-                    trailing: const Icon(
+                    trailing: Icon(
                       Icons.chevron_right_rounded,
                       color: AppColors.textTertiary,
                     ),
@@ -153,7 +153,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     icon: Icons.local_hospital_outlined,
                     title: 'Medical Info',
                     subtitle: 'Blood type, allergies, conditions',
-                    trailing: const Icon(
+                    trailing: Icon(
                       Icons.chevron_right_rounded,
                       color: AppColors.textTertiary,
                     ),
@@ -164,7 +164,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     icon: Icons.dark_mode_outlined,
                     title: 'Dark Mode',
                     subtitle: 'Coming soon',
-                    trailing: const Icon(
+                    trailing: Icon(
                       Icons.chevron_right_rounded,
                       color: AppColors.textTertiary,
                     ),
@@ -200,7 +200,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           color: AppColors.emergency.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.emergency_outlined,
                           color: AppColors.emergency,
                           size: 22,
@@ -315,7 +315,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   color: AppColors.warningLight,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.logout_rounded,
                   color: AppColors.warning,
                   size: 28,
